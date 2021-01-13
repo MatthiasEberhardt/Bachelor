@@ -1,0 +1,53 @@
+
+#meta: size=450, randomness=25, bs=4, lr=0.0001, nir_conv=g_conv, net=resnet34(pretrained), loss=CrossEntropyLoss_mod, metric=accuracy, training_data=raw_data, data aug,no normalization
+epoch	train_loss	valid_loss	accuracy	time
+0	1.398010	0.709785	0.795977	07:51
+1	0.515638	0.617543	0.709770	07:11
+2	0.467782	0.380225	0.827586	06:57
+3	0.410396	0.492361	0.833333	06:58
+4	0.382123	0.461608	0.804598	06:58
+5	0.372934	0.403842	0.824713	07:00
+6	0.340169	0.353642	0.847701	06:59
+7	0.304550	0.330269	0.867816	06:57
+8	0.326039	0.335080	0.853448	07:04
+9	0.291143	03:01
+
+epoch	train_loss	valid_loss	accuracy	time
+0	1.398010	0.709785	0.795977	07:04
+1	0.515638	0.617543	0.709770	07:10
+2	0.467782	0.380225	0.827586	07:22
+3	0.410396	0.492361	0.833333	07:41
+4	0.382123	0.461608	0.804598	07:23
+5	0.372934	0.403842	0.824713	07:13
+6	0.340169	0.353642	0.847701	07:17
+7	0.304550	0.330269	0.867816	07:09
+8	0.359551	03:33
+
+#meta: size=450, randomness=25, bs=4, lr=0.0001, nir_conv=g_conv, net=resnet34(pretrained), loss=CrossEntropyLoss_mod, metric=accuracy, training_data=raw_data, data aug, normalization (imagenet_stats)
+#normalized, with mean=rgbg and std=rgbg, both mean and std from imagenet_stats
+
+epoch	train_loss	valid_loss	accuracy	time
+0	2.410307	28.742371	0.511494	07:46
+1	0.675460	14.562426	0.511494	07:56
+2	0.643286	2.632010	0.511494	07:44
+3	0.591877	13.557697	0.491379	07:46
+4	0.575938	2.396500	0.514368	07:28
+5	0.549066	58.514542	0.488506	07:29
+6	0.595860	25.622868	0.511494	07:29
+7	0.558492	03:37
+
+
+#meta: size=400, randomness=25, bs=4, lr=0.0001, nir_conv=g_conv, net=resnet34(pretrained), loss=CrossEntropyLoss_mod, metric=accuracy, training_data=raw_data, data aug, normalization (mean and std calculated and raw data)
+#normalized, with mean=rgbg and std=rgbg, both mean and std from raw data
+
+epoch	train_loss	valid_loss	accuracy	time
+0	2.538174	10.351088	0.511494	07:20
+1	0.653842	51.970932	0.488506	07:01
+2	0.639616	7.748652	0.488506	06:58
+3	0.595872	18.383938	0.511494	06:55
+4	0.604582	96.601891	0.488506	06:58
+5	0.565788	282.732147	0.511494	06:58
+6	0.531458	32.686317	0.511494	06:51
+7	0.527714	142.778397	0.511494	06:52
+8	0.561439	72.130943	0.511494	06:54
+9	0.536778	59.690487	0.511494	07:01
