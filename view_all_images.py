@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 import numpy as np
 
 #path to 400x400px images
-path=r"D:/Bachelor/data/ImageFiles_downsized"
+path="D:/Bachelor/data/ImageFiles_downsized_and_cleaned/classified_data"
 nr_of_classifications={}
 classifications={}
 file=Path("nr_of_classifications.json")
@@ -48,12 +48,12 @@ else:
 class WindowManager:
 
 	def __init__(self):
-		self.wrongly_classified=[]
+		self.images=[]
 		self.index=0
 		self.load_paths()
 		self.displayed_image=""
 		self.window=Tk()
-		self.window.title("wrongly classified images")
+		self.window.title("view all images")
 		#self.save_button=tk.Button(self.window,text="save",command=save)
 		#self.save_button.grid(row=0,column=2)
 		self.window.geometry("900x500")
@@ -62,11 +62,11 @@ class WindowManager:
 		self.label_nir=tk.Label(self.window,text="nir-channel")
 		self.label_nir.grid(row=1,column=1)
 
-		self.label_cat=tk.Label(self.window,text="category: {}".format(self.wrongly_classified[0].split("/")[0]))
+		self.label_cat=tk.Label(self.window,text="category: {}".format(self.images[0].split("/")[0]))
 		self.label_cat.grid(row=0,column=0)
-		self.label_count=tk.Label(self.window,text="1 of {}".format(len(self.wrongly_classified)))
+		self.label_count=tk.Label(self.window,text="1 of {}".format(len(self.images)))
 		self.label_count.grid(row=0,column=1)
-		self.label_name=tk.Label(self.window,text=self.wrongly_classified[0])
+		self.label_name=tk.Label(self.window,text=self.images[0])
 		self.label_name.grid(row=0,column=2)
 		self.canvas_rgb = tk.Canvas(master=self.window,width=400,height=400)
 		self.canvas_rgb.grid(row=2,column=0)
@@ -82,9 +82,9 @@ class WindowManager:
 		self.window.mainloop()
 
 	def set_labels(self):
-		self.label_cat["text"]=self.wrongly_classified[self.index].split("/")[0]
-		self.label_count["text"]="{} of {}".format(self.index+1,len(self.wrongly_classified))
-		self.label_name["text"]=self.wrongly_classified[self.index]
+		self.label_cat["text"]=self.images[self.index].split("/")[0]
+		self.label_count["text"]="{} of {}".format(self.index+1,len(self.images))
+		self.label_name["text"]=self.images[self.index]
 
 	def prev_image(self):
 		self.prev()
@@ -99,25 +99,21 @@ class WindowManager:
 	def prev(self):
 		self.index=self.index-1
 		if self.index==-1:
-			self.index=len(self.wrongly_classified)-1
+			self.index=len(self.images)-1
 
 
 	def next(self):
 		self.index=self.index+1
-		if self.index==len(self.wrongly_classified):
+		if self.index==len(self.images):
 			self.index=0
 
 	def load_paths(self):
-		for cat in classifications.keys():
-			for file in classifications[cat].keys():
-				pred=0
-				for entrance in classifications[cat][file]:
-					pred=pred+entrance
-				if pred==0:
-					self.wrongly_classified.append(cat+"/"+file)
+		for cat in os.listdir("D:/Bachelor/data/ImageFiles_downsized_and_cleaned/classified_data"):
+			for file in os.listdir("/".join(("D:/Bachelor/data/ImageFiles_downsized_and_cleaned/classified_data",cat))):
+				self.images.append(cat+"/"+file)
 
 	def get_path(self):
-		return self.wrongly_classified[self.index]
+		return self.images[self.index]
 
 	def display_image(self):
 		global path
